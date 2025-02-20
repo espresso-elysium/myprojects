@@ -1,0 +1,37 @@
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+import ipywidgets as widgets
+from IPython.display import display, clear_output
+
+# Initialize brightness level
+brightness = 1.0
+
+def adjust_brightness(change):
+    global brightness
+    brightness += change  # Increase or decrease brightness factor
+    brightness = max(0.1, min(brightness, 3.0))  # Keep brightness within range
+    
+    led_color = np.array([255, 165, 0]) * brightness  # Adjust RGB value for LED
+    led_color = np.clip(led_color, 0, 255).astype(np.uint8)  # Ensure valid RGB range
+    
+    clear_output(wait=True)  # Clear previous output
+    display_controls()
+    
+    plt.figure(figsize=(2, 2))
+    plt.imshow([[led_color/255]])  # Display LED with current brightness
+    plt.axis("off")
+    plt.show()
+
+def display_controls():
+    up_button = widgets.Button(description="Increase Brightness")
+    down_button = widgets.Button(description="Decrease Brightness")
+    
+    up_button.on_click(lambda _: adjust_brightness(0.1))
+    down_button.on_click(lambda _: adjust_brightness(-0.1))
+    
+    display(up_button, down_button)
+
+# Set up the plot and turn on interactive mode
+display_controls()
+adjust_brightness(0)
