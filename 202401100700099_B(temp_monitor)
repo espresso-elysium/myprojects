@@ -1,0 +1,25 @@
+import random
+import time
+from IPython.display import display, clear_output
+
+def monitor_temperature_colab(lower_limit=10, upper_limit=35):
+    try:
+        while True:
+            temp = random.uniform(5, 40)
+            clear_output(wait=True)  # Clears the output for a cleaner display
+            print(f"🌡️ Current Temperature: {temp:.2f}°C")
+            
+            if temp < lower_limit:
+                print("⚠️ ALERT: Temperature is too LOW!")
+            elif temp > upper_limit:
+                print("⚠️ ALERT: Temperature is too HIGH!")
+            else:
+                print("✅ Temperature is normal.")
+                
+            print("\n(To stop the monitoring, click the stop button above this cell)")
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print("❌ Monitoring stopped by user.")
+
+# Run it
+monitor_temperature_colab()
