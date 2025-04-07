@@ -1,0 +1,132 @@
+# To-Do Notes Builder
+
+def display_menu():
+    print("\nTo-Do Notes Builder")
+    print("1. Add Task")
+    print("2. View Tasks")
+    print("3. Delete Task")
+    print("4. Mark Task as Completed")
+    print("5. Exit")
+
+def add_task(tasks):
+    task = input("Enter the task: ")
+    tasks.append({"task": task, "completed": False})
+    print(f"Task '{task}' added.")
+
+def view_tasks(tasks):
+    if not tasks:
+        print("No tasks available.")
+    else:
+        print("\nTasks List:")
+        for idx, task in enumerate(tasks, 1):
+            status = "Completed" if task["completed"] else "Pending"
+            print(f"{idx}. {task['task']} - {status}")
+
+def delete_task(tasks):
+    view_tasks(tasks)
+    if tasks:
+        try:
+            task_index = int(input("Enter the task number to delete: ")) - 1
+            if 0 <= task_index < len(tasks):
+                deleted_task = tasks.pop(task_index)
+                print(f"Task '{deleted_task['task']}' has been deleted.")
+            else:
+                print("Invalid task number.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+def mark_task_completed(tasks):
+    view_tasks(tasks)
+    if tasks:
+        try:
+            task_index = int(input("Enter the task number to mark as completed: ")) - 1
+            if 0 <= task_index < len(tasks):
+                tasks[task_index]["completed"] = True
+                print(f"Task '{tasks[task_index]['task']}' marked as completed.")
+            else:
+                print("Invalid task number.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+def main():
+    tasks = []
+    while True:
+        display_menu()
+        choice = input("Enter your choice: ")
+        
+        if choice == "1":
+            add_task(tasks)
+        elif choice == "2":
+            view_tasks(tasks)
+        elif choice == "3":
+            delete_task(tasks)
+        elif choice == "4":
+            mark_task_completed(tasks)
+        elif choice == "5":
+            print("Exiting the To-Do Notes Builder.")
+            break
+        else:
+            print("Invalid choice. Please enter a valid option.")
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+     To-Do Notes Builder
+1. Add Task
+2. View Tasks
+3. Delete Task
+4. Mark Task as Completed
+5. Exit
+Enter your choice: 1
+Enter the task: to complette python case study
+Task 'to complette python case study' added.
+
+To-Do Notes Builder
+1. Add Task
+2. View Tasks
+3. Delete Task
+4. Mark Task as Completed
+5. Exit
+Enter your choice: 2
+
+Tasks List:
+1. to complette python case study - Pending
+
+To-Do Notes Builder
+1. Add Task
+2. View Tasks
+3. Delete Task
+4. Mark Task as Completed
+5. Exit
+Enter your choice: 4
+
+Tasks List:
+1. to complette python case study - Pending
+Enter the task number to mark as completed: 1
+Task 'to complette python case study' marked as completed.
+
+To-Do Notes Builder
+1. Add Task
+2. View Tasks
+3. Delete Task
+4. Mark Task as Completed
+5. Exit
+Enter your choice: 3
+
+Tasks List:
+1. to complette python case study - Completed
+Enter the task number to delete: 1
+Task 'to complette python case study' has been deleted.
+
+To-Do Notes Builder
+1. Add Task
+2. View Tasks
+3. Delete Task
+4. Mark Task as Completed
+5. Exit
+Enter your choice: 5
+Exiting the To-Do Notes Builder.
