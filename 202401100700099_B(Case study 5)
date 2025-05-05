@@ -1,0 +1,34 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Read the uploaded Excel file
+data = pd.read_excel("Case_Study_5_B.xlsx")
+
+# Calculate percentage (Max marks = 15)
+data['Percentage'] = (data['Marks'] / 15) * 100
+
+# Categorize students
+high_achievers = data[data['Percentage'] > 75]
+average_students = data[(data['Percentage'] >= 60) & (data['Percentage'] <= 75)]
+low_achievers = data[data['Percentage'] < 60]
+
+# Print categories
+print("Students with >75%:\n", high_achievers)
+print("\nStudents with 60%-75%:\n", average_students)
+print("\nStudents with <60%:\n", low_achievers)
+
+# Plot Histogram (blue bars, width=5, black border)
+plt.figure(figsize=(10, 6))
+plt.hist(data['Percentage'], bins=range(0, 101, 5), color='blue', edgecolor='black')
+plt.xlabel("Percentage")
+plt.ylabel("Number of Students")
+plt.title("Histogram Plot")
+plt.show()
+
+# Plot Scatter Plot
+plt.figure(figsize=(10, 6))
+plt.scatter(data.index, data['Percentage'], color='blue')
+plt.xlabel("Students")
+plt.ylabel("Percentage")
+plt.title("Scatter Plot")
+plt.show()
